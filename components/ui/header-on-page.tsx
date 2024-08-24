@@ -3,8 +3,8 @@ import { ImageProps } from "@/utils/types";
 import { AnimatedText } from "./animated-text";
 type Props = {
   children?: string | JSX.Element;
-  title: string;
-  subtitle: string;
+  title?: string;
+  subtitle?: string;
   subtitle2?: string;
   image?: any;
 };
