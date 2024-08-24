@@ -20,9 +20,7 @@ interface DataContent {
   images: Image[];
 }
 
-interface DataContentList {
-  dataContent: DataContent[];
-}
+
 
 type Props = {};
 
@@ -32,7 +30,7 @@ export const metadata: Metadata = {
 };
 
 const Page = async (props: Props) => {
-  const contentData = await fetchDataImage();
+  // const contentData = await fetchDataImage();
 
   return (
     <AnimationWrapper>
@@ -43,7 +41,7 @@ const Page = async (props: Props) => {
       />
 
       <div className="flex flex-col items-center justify-between md:px-24 pt-24">
-        {contentData?.dataContent.map((data: DataContent, index: number) => (
+        {contentData.map((data: DataContent, index: number) => (
           // for each image, show the image alternatingly on left and right with the setiesTitle and description on the other side
           <>
             <Separator key={index} className={index === 0 ? "hidden" : ""} />
