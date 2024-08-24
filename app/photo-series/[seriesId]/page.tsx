@@ -8,7 +8,8 @@ import Image from "next/image";
 import { Metadata, ResolvingMetadata } from "next";
 import { ImageSeriesProps } from "@/utils/types";
 import AnimationWrapper from "@/components/ui/animation-wrapper";
-import { fetchDataImage } from "@/utils/contentful-fetches";
+import { contentData } from "@/utils/contentData";
+// import { fetchDataImage } from "@/utils/contentful-fetches";
 
 type Props = { params: { seriesId: number } };
 interface Image {
@@ -44,7 +45,7 @@ export async function generateMetadata(
 
 async function Page({ params }: Props) {
   const { seriesId } = params;
-  const data = await fetchDataImage();
+  // const data = await fetchDataImage();
 
   //handle pretty urls, the stulg is fetched and the data is filtered from the same query
   // const data = data_.props.images.filter(
@@ -55,9 +56,10 @@ async function Page({ params }: Props) {
   // let x = await JSON.stringify(data.images);
   return (
     <AnimationWrapper>
-      <Header title={data?.dataContent[seriesId].category} subtitle={data?.dataContent[seriesId].content} />
+
+      <Header title={contentData[seriesId].category} subtitle={contentData[seriesId].content} />
       <section className="py-24 md:mx-1 justify-self-center ">
-        {data?.dataContent[seriesId].images.map((image: Image, index: number) => (
+        {contentData[seriesId].images.map((image: Image, index: number) => (
           <div
             className={`flex flex-col items-center justify-between md:px-24 pt-24 py-1 text-2xl tracking-tight transition-colors text-muted-foreground ${
               // index % 2 ? "md:flex-row-reverse" : ""
@@ -72,7 +74,7 @@ async function Page({ params }: Props) {
               </p>
             </div> */}
             <Image
-              src={`/images/${data?.dataContent[seriesId].category}/${image.imgSrc}`}
+              src={`/images/${contentData[seriesId].category}/${image.imgSrc}`}
               alt={image.description}
               width={400}
               height={300}
