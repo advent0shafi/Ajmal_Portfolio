@@ -10,7 +10,7 @@ import {
 import ModalSwiper from "@/components/swiper/modal-swiper";
 import { ImageProps } from "@/utils/types";
 import AnimationWrapper from "@/components/ui/animation-wrapper";
-import { wholeImageData } from "@/utils/contentData";
+import { generateImageData } from "@/utils/contentData";
 
 type Props = { params: { photoId: string } };
 
@@ -25,16 +25,19 @@ export async function generateMetadata(
   };
 }
 
-// export async function generateStaticParams() {
-//   const dataAll = await getDataPhotographs();
-//   const data = dataAll.props.images;
-//   return data.map((image: any) => ({
-//     photoId: image.idc.toString(),
-//     revalidate: 86400,
-//   }));
-// }
+export async function generateStaticParams() {
+  // Fetch the image data
+  const wholeImageData: ImageProps[] = await generateImageData();
+
+  // Generate static params for each image
+  return wholeImageData.map((image) => ({
+    id: image.idc, // Assuming 'idc' is used as a unique identifier for each page
+  }));
+}
 
 async function Page({ params }: Props) {
+  const wholeImageData: ImageProps[] = await generateImageData();
+
   return (
     <AnimationWrapper>
       <div>
