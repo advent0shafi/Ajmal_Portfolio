@@ -1,6 +1,6 @@
 import ModalSwiper from "@/components/swiper/modal-swiper";
 import Modal from "@/components/ui/Modal/modal";
-import { wholeImageData } from "@/utils/contentData";
+import { generateImageData } from "@/utils/contentData";
 import { ImageProps } from "@/utils/types";
 import { Metadata, ResolvingMetadata } from "next";
 // import { ImageProps } from "@/utils/types";
@@ -33,6 +33,7 @@ async function Page({ params }: Props) {
   // const { photoId } = params;
   // const data = await getAnAsset(photoId);
   var idc = params.photoId;
+  const wholeImageData: ImageProps[] = await generateImageData();
 
   // const currentImage = data;
   return (
